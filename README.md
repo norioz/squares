@@ -1,4 +1,4 @@
 squares
 =======
 
-Squares app for testing phonegap deploy on android
+Squares app for testing phonegap deploy on android!!! Ooooh la la!!
