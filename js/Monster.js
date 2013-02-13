@@ -41,7 +41,7 @@
 
         // set up a shadow. Note that shadows are ridiculously expensive. You could display hundreds
         // of animated monster if you disabled the shadow.
-        this.shadow = new createjs.Shadow("#000", 3, 2, 2);
+        //this.shadow = new createjs.Shadow("#000", 3, 2, 2);
 
         this.name = monsterName;
         // 1 = right & -1 = left
