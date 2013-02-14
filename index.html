@@ -2,26 +2,36 @@
 <html>
 
 <head>
-  <title>Test EaselJS</title>
+  <title>Scrap</title>
 
-  <script type="text/javascript" src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
-  <script type="text/javascript" src="js/ContentManager.js"></script>
-  <script type="text/javascript" src="js/Monster.js"></script>
-  <script type="text/javascript" src="js/Player.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="phonegap.js"></script>
 </head>
 
 <body>
-  <div class="description"></div>
 
-  <div class="canvasHolder">
-    <canvas id="testCanvas" width="800" height="480" style="background-color:#607559">
-      Your browser doesn't support canvas. Please download something better.
-    </canvas>
-  </div>
+  <canvas id="myCanvas" width="578" height="400"></canvas>
+  <script>
+     var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+var imgs = [];
+var x = 0, y = 0, i = 0;
+var img;
 
-  <button id="Start" onclick=init();>Start</button><button id="Reset" onclick=reset();>Reset</button>
+    for (i=0; i<3; i++) {	
+	img = new Image();
+	img.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
+	img.onload = (function(img, i) {
+		return function() {		    
+		    x = img.width*i;
+		    y = img.height*i;
+		    context.drawImage(img, x, y);
+		    alert("drawing " + i + " at " + x + "," + y);
+
+		}
+	    })(img, i);
+	
+}
+  </script>
 
 </body>
 </html>
