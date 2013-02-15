@@ -1,7 +1,7 @@
 // img,x,y,width,height | x and y from upper left
-// the image is 40x32
+// the image is 40wx32h
 // the canvas is 380x600
-var NUM_BLOCKS = 50;
+var NUM_BLOCKS = 100;
 var block;
 
 var xCoords = new Array();
@@ -23,10 +23,10 @@ function update() {
     for (var i = 0; i < NUM_BLOCKS; i++) {
 	xCoords[i] = xCoords[i] + xVels[i] * 0.05;
 	yCoords[i] = yCoords[i] + yVels[i] * 0.05;
-	if (xCoords[i] > canvas.width || xCoords[i] < 0) {
+	if (xCoords[i] > canvas.width-40 || xCoords[i] < 0) {
 	    xVels[i] = xVels[i] * -1;
 	}
-	if (yCoords[i] > canvas.height || yCoords[i] < 0) {
+	if (yCoords[i] > canvas.height-32 || yCoords[i] < 0) {
 	    yVels[i] = yVels[i] * -1;
 	}
 	context.drawImage(block, xCoords[i], yCoords[i]);

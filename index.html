@@ -16,13 +16,24 @@
       canvas.width = width;
       canvas.height = height;
       canvas.style.background = 'white';
+      canvas.style.zIndex = 10;
+      canvas.style.position = "absolute";
+      canvas.style.top = "0";
+      canvas.style.left ="0";
+      canvas.style.display = "none";
       document.body.appendChild(canvas);
+    }
+    function showCanvas() {
+      document.getElementById("canvas1").style.display="inline";
+    }
+    function runSquares() {
       load();
     }
     window.onload = setupCanvas;
   </script>
 </head>
 <body>
+  <button onclick="javascript:showCanvas();runSquares();">squares</button>
 </body>
 <script type="text/javascript">
 </script>
