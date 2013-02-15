@@ -5,21 +5,25 @@
   <link rel="stylesheet" href="css/squares.css">
   <script type="text/javascript" src="js/squares.js"></script>
   <script type="text/javascript">
-    window.onload = load;
+    function setupCanvas() {
+      var width, height, canvas;
+      width = document.documentElement.clientWidth;
+      width = width > 600 ? 600 : width;
+      height = document.documentElement.clientHeight;
+      height = height > 600 ? 300 : height;
+      canvas = document.createElement('canvas');
+      canvas.id = "canvas1";
+      canvas.width = width;
+      canvas.height = height;
+      canvas.style.background = 'white';
+      document.body.appendChild(canvas);
+      load();
+    }
+    window.onload = setupCanvas;
   </script>
 </head>
 <body>
 </body>
 <script type="text/javascript">
-  var width, height, isBrowser;
-  width = document.documentElement.clientWidth;
-  width = width > 600 ? 600 : width;
-  height = document.documentElement.clientHeight;
-  height = height > 600 ? 300 : height;
-  var canvas = document.createElement('canvas');
-  canvas.id = "canvas1";
-  canvas.width = width;
-  canvas.height = height;
-  document.body.appendChild(canvas);
 </script>
 </html>
