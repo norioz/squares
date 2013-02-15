@@ -32,7 +32,9 @@ function update() {
 	context.drawImage(block, xCoords[i], yCoords[i]);
     }
 }
-
+function stopSquares() {
+    window.clearInterval(timer);
+}
 function setup() {
     context.drawImage(block, 150, 100);
     for (var i = 0; i < NUM_BLOCKS; i++) {
@@ -42,9 +44,9 @@ function setup() {
 	yVels.push(randInt(0, 100));
     }
     timer = window.setInterval(update, 20);
+    canvas.addEventListener('click', function() {stopSquares();}, false);
 }
-
-function load() {
+function runSquares() {
     block = new Image();
     block.onload = setup;
     block.src = 'img/Tiles/BlockA0.png';
