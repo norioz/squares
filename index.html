@@ -8,8 +8,17 @@
   </script>
 </head>
 <body>
-  <canvas id="canvas1" width="380" height="600" style="border:1px solid #9C9898;">
-    Browser doesn't support canvas element.
-  </canvas>
 </body>
+<script type="text/javascript">
+  var width, height, isBrowser;
+  isBrowser = typeof(PhoneGap) == 'undefined';
+  var canvas = document.createElement('canvas');
+  canvas.id = "canvas1";
+  canvas.width = isBrowser ? 600 : window.innerWidth;
+  canvas.height = isBrowser ? 300 : window.innerHeight;
+  if (isBrowser) {
+    canvas.style.border = "1px solid";
+  }
+  document.body.appendChild(canvas);
+</script>
 </html>
