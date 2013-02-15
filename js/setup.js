@@ -13,12 +13,12 @@ function setupCanvas() {
 	canvas.style.display = "none";
 	document.body.appendChild(canvas);
     }
-    if (typeof PhoneGap === 'undefined') {
-	canvas.width = 600;
-	canvas.height = 400;
-    } else {
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 	canvas.width = document.documentElement.clientWidth;
 	canvas.height = document.documentElement.clientHeight;
+    } else {
+	canvas.width = 200;
+	canvas.height = 800;
     }
 }
 function showCanvas() {
