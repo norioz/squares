@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Squares Test</title>
+  <link rel="stylesheet" href="css/squares.css">
   <script type="text/javascript" src="js/squares.js"></script>
   <script type="text/javascript">
     window.onload = load;
@@ -11,14 +12,14 @@
 </body>
 <script type="text/javascript">
   var width, height, isBrowser;
-  isBrowser = typeof(PhoneGap) == 'undefined';
+  width = document.documentElement.clientWidth;
+  width = width > 600 ? 600 : width;
+  height = document.documentElement.clientHeight;
+  height = height > 600 ? 300 : height;
   var canvas = document.createElement('canvas');
   canvas.id = "canvas1";
-  canvas.width = isBrowser ? 600 : window.innerWidth;
-  canvas.height = isBrowser ? 300 : window.innerHeight;
-  if (isBrowser) {
-    canvas.style.border = "1px solid";
-  }
+  canvas.width = width;
+  canvas.height = height;
   document.body.appendChild(canvas);
 </script>
 </html>
