@@ -17,4 +17,6 @@
     Munch Labs
   </author>
 
+  <preference name="orientation" value="landscape" />
+  <preference name="fullscreen" value="true" />
 </widget>
