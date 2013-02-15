@@ -3,11 +3,11 @@
 <head>
   <title>Squares Test</title>
   <link rel="stylesheet" href="css/squares.css"></link>
+  <script type="text/javascript" src="phonegap.js"></script>
   <script type="text/javascript" src="js/setup.js"></script>
   <script type="text/javascript" src="js/squares.js"></script>
-  <script type="text/javascript">window.onload = setupCanvas;</script>
 </head>
-<body>
+<body onload="setupCanvas();">
   <button onclick="javascript:showCanvas();runSquares();">squares</button>
 </body>
 <script type="text/javascript">
