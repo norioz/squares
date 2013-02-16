@@ -1,55 +1,55 @@
 // img,x,y,width,height | x and y from upper left
 // the image is 40wx32h
 // the canvas is 380x600
-var NUM_BLOCKS = 100;
-var block;
 
-var xCoords = new Array();
-var yCoords = new Array();
-var xVels = new Array();    // in pixels per sec
-var yVels = new Array();    // in pixels per sec
-
-var canvas;
-var context;
-
-var timer;
-
-function randInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function update() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < NUM_BLOCKS; i++) {
-	xCoords[i] = xCoords[i] + xVels[i] * 0.05;
-	yCoords[i] = yCoords[i] + yVels[i] * 0.05;
-	if (xCoords[i] > canvas.width-40 || xCoords[i] < 0) {
-	    xVels[i] = xVels[i] * -1;
+/**
+ * squares isa level
+ */
+var squares = {
+    "NUM_BLOCKS" : 100,
+    "block" : null,
+    "timer" : null,
+    "context" : null,
+    "xCoords" : new Array(),
+    "yCoords" : new Array(),
+    "xVels" : new Array(),  // in pixels per sec
+    "yVels" : new Array(),  // in pixels per sec
+    "randInt" : function(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    "update" : function() {
+	this.context.clearRect(0, 0, canvas.width, canvas.height);
+	for (var i = 0; i < squares.NUM_BLOCKS; i++) {
+	    this.xCoords[i] = this.xCoords[i] + this.xVels[i] * 0.05;
+	    this.yCoords[i] = this.yCoords[i] + this.yVels[i] * 0.05;
+	    if (this.xCoords[i] > canvas.width - 40 || this.xCoords[i] < 0) {
+		this.xVels[i] = this.xVels[i] * -1;
+	    }
+	    if (this.yCoords[i] > canvas.height-32 || this.yCoords[i] < 0) {
+		this.yVels[i] = this.yVels[i] * -1;
+	    }
+	    this.context.drawImage(squares.block, this.xCoords[i], this.yCoords[i]);
 	}
-	if (yCoords[i] > canvas.height-32 || yCoords[i] < 0) {
-	    yVels[i] = yVels[i] * -1;
+    },
+    "stop" : function() {
+	window.clearInterval(this.timer);
+    },
+    "setup" : function() {
+	for (var i = 0; i < this.NUM_BLOCKS; i++) {
+	    this.xCoords.push(150);
+	    this.yCoords.push(100);
+	    this.xVels.push(this.randInt(0, 100));
+	    this.yVels.push(this.randInt(0, 100));
 	}
-	context.drawImage(block, xCoords[i], yCoords[i]);
+	this.timer = window.setInterval(function(){squares.update();}, 20);
+	canvas.addEventListener('click', stop, false);
+    },
+    "run" : function() {
+	this.context = window.canvas.getContext('2d');
+	this.block = new Image();
+	this.block.onload = function () {squares.setup();};
+	this.block.src = 'img/Tiles/BlockA0.png';
     }
-}
-function stopSquares() {
-    window.clearInterval(timer);
-}
-function setup() {
-    context.drawImage(block, 150, 100);
-    for (var i = 0; i < NUM_BLOCKS; i++) {
-	xCoords.push(150);
-	yCoords.push(100);
-	xVels.push(randInt(0, 100));
-	yVels.push(randInt(0, 100));
-    }
-    timer = window.setInterval(update, 20);
-    canvas.addEventListener('click', function() {stopSquares();}, false);
-}
-function runSquares() {
-    block = new Image();
-    block.onload = setup;
-    block.src = 'img/Tiles/BlockA0.png';
-    canvas = document.getElementById('canvas1');
-    context = canvas.getContext('2d');
-}
+};
+
+
