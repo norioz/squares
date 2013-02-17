@@ -37,6 +37,8 @@ window.game = {
 	    this.level.resources[item] = im;
 	}
 	this.level.context = window.canvas.getContext('2d');
+	// allow the level to setup
+	this.level.setup();
 	this.timer_ref = window.setInterval(function(){game.level.update();}, 20);
     },
     "stop" : function() {
