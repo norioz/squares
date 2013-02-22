@@ -3,6 +3,18 @@ function setupCanvas() {
     if (window.canvas == null) {
 	canvas = document.createElement('canvas');
 	canvas.id = "canvas1";
+	canvas.onclick = function(e) {
+	    var mouseX, mouseY;
+	    if (e.offsetX) {
+		mouseX = e.offsetX;
+		mouseY = e.offsetY;
+	    }
+	    else if (e.layerX) {
+		mouseX = e.layerX;
+		mouseY = e.layerY;
+	    }
+	    window.game.level.click(mouseX, mouseY);
+	};
 	canvas.style.background = 'white';
 	canvas.style.zIndex = 10;
 	canvas.style.position = "absolute";
@@ -39,7 +51,12 @@ window.game = {
 	this.level.context = window.canvas.getContext('2d');
 	// allow the level to setup
 	this.level.setup();
-	this.timer_ref = window.setInterval(function(){game.level.update();}, 20);
+	this.timer_ref = window.setInterval(function() {
+	    var t = Date.now();
+	    var delta = t - game.lastUpdate;
+	    game.level.update(delta);
+	    game.lastUpdate = t;
+	}, 20);
     },
     "stop" : function() {
 	window.clearInterval(this.timer_ref);

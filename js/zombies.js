@@ -12,9 +12,11 @@ var zombies = {
 	spritesheet : 'img/sprite-composite.png',
     },
     _scrollx : 0,
+    _destx : null,
     _playerx : null,
     _playery : null,
-    update : function() {
+    
+    update : function(millis) {
 	var bg, x, w, h;
 	var bg = this.resources.background;
 	var ss = this.resources.spritesheet;
@@ -23,23 +25,33 @@ var zombies = {
 	var h = canvas.height;
 	
 	// update
-	
-	// if (x < 2398 - w) {
-	//     this._scrollx = this._scrollx + 1;
-	// } else {
-	//     game.stop();
-	// }
-
+	var loc = this._scrollx + this._playerx + 32;
+//	console.log('dest='+this._destx+' loc='+loc);
+	if (loc < this._destx) {
+	    this._scrollx += 1;
+	} else if (loc > this._destx && loc > 0) {
+	    this._scrollx -= 1;
+	}
 	// draw
 	this.context.clearRect(0, 0, canvas.width, canvas.height);
-	this.context.drawImage(bg,x,0,w,h,0,0,w,h);
 	var sprite = this.sprites.player;
 	var act = sprite.actions.stand;
+	this.context.drawImage(bg,x,0,w,h,0,0,w,h);
+	this.context.fillRect(this._playerx,this._playery,sprite.width,sprite.height);
 	this.context.drawImage(ss,act.x,act.y,sprite.width,sprite.height,this._playerx,this._playery,sprite.width,sprite.height);
     },
     setup : function() {
 	this._playerx = window.canvas.width / 2 - 32;
-	this._playery = window.canvas.height / 2 - 32;
+	this._destx = this._playerx + 32;
+	this._playery = window.canvas.height / 2 + 80;
+    },
+    click : function(x, y) {
+	if ((x >= this._playerx && x < this._playerx + 64) &&
+	    (y >= this._playery && y < this._playery + 64)) {
+	    alert('go!');
+	    return;
+	}
+	this._destx = x;
     },
     sprites : {
 	player : {
