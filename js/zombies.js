@@ -29,14 +29,15 @@ var zombies = {
 //	console.log('dest='+this._destx+' loc='+loc);
 	if (loc < this._destx) {
 	    this._scrollx += 1;
-	} else if (loc > this._destx && loc > 0) {
+	} else if (loc > this._destx) {
 	    this._scrollx -= 1;
 	}
 	// draw
 	this.context.clearRect(0, 0, canvas.width, canvas.height);
 	var sprite = this.sprites.player;
 	var act = sprite.actions.stand;
-	this.context.drawImage(bg,x,0,w,h,0,0,w,h);
+//	this.context.drawImage(bg,x,0,w,h,0,0,w,h);
+	this.context.drawImage(bg,(-1*x), 0);
 	this.context.fillRect(this._playerx,this._playery,sprite.width,sprite.height);
 	this.context.drawImage(ss,act.x,act.y,sprite.width,sprite.height,this._playerx,this._playery,sprite.width,sprite.height);
     },
@@ -51,7 +52,7 @@ var zombies = {
 	    alert('go!');
 	    return;
 	}
-	this._destx = x;
+	this._destx = this._scrollx + x;
     },
     sprites : {
 	player : {
